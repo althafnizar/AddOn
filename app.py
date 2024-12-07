@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 app = Flask(__name__)  #class object
 
@@ -28,5 +28,19 @@ def base():
 @app.route('/form')
 def form():
     return render_template("form.html")
+
+@app.route('/addplayer',methods=['GET','POST'])
+def addplayer():
+    if request.method== 'POST':
+        name=request.form['name']
+        age=request.form['age']
+        #print(name,age)
+        return name + " " + age
+    else:
+        return render_template("addplayer.html")
+    
+
+
+#@app.route('/addplayer',method=['POST'])
 
 app.run(debug=True)
